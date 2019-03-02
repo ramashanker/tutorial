@@ -83,14 +83,16 @@ $ docker-compose  up
 ### Running the application using Kubernetes.
 
 ```
-kubectl create -f security-application.yml
+kubectl create -f application-deployment.yml
 kubectl get pods
 kubectl get deployment
-kubectl describe deployments security-deployment
+kubectl describe deployments spring-boot-deployment
 docker ps
-kubectl expose deployment security-deployment --type=LoadBalancer --name=rama-service
-kubectl get services rama-service
-kubectl describe services rama-service
+kubectl cluster-info
+kubectl expose deployment spring-boot-deployment --type=LoadBalancer --name=data-service
+kubectl get services data-service
+kubectl describe services data-service
+
 ```
 
 ## Swagger 
