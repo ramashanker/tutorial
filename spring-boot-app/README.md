@@ -104,3 +104,9 @@ Example
 http://localhost:8083/swagger-ui.html
 
 ## Testing
+
+http://localhost:8080/log/message
+
+## Splunk Query
+
+host=splunkforwarder| regex  message=(?<field>.*(?=Log.*)) | stats   latest(trace) as trace  latest(class) as class latest(message) as message by thread
