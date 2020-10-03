@@ -1,4 +1,4 @@
-package com.rama.spring.app.controller;
+package com.rama.app.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppController {	
 	    @RequestMapping("/")
 	    public String index() {
-	        return "Greetings from Tutorial in 5 minute!";
+	        return "Hello from controller";
 	    }   
 }

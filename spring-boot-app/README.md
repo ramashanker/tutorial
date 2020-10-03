@@ -83,15 +83,45 @@ $ docker-compose  up
 ### Running the application using Kubernetes.
 
 ```
-kubectl create -f application-deployment.yml
-kubectl get pods
-kubectl get deployment
-kubectl describe deployments spring-boot-deployment
+microk8s kubectl create -f application-deployment.yml
+microk8s kubectl get pods
+microk8s kubectl get deployment
+microk8s kubectl describe deployments spring-boot-deployment
 docker ps
-kubectl cluster-info
-kubectl expose deployment spring-boot-deployment --type=LoadBalancer --name=data-service
-kubectl get services data-service
-kubectl describe services data-service
+microk8s kubectl cluster-info
+microk8s kubectl expose deployment spring-boot-deployment --type=LoadBalancer --name=data-service
+microk8s kubectl get services data-service
+microk8s kubectl describe services data-service
+```
+
+#### Debug in K8
+```
+kubectl delete deployment spring-boot-deployment
+kubectl delete -f application-deployment.yml
+sudo microk8s kubectl delete svc data-service
+kubectl describe pods <pod-name>
+```
+
+####Microk8s
+```
+Convert docker-compose to deployement yml
+
+kompose convert -f docker-compose.yml
+
+sudo snap install microk8s — classic
+sudo microk8s.inspect
+sudo microk8s.start
+sudo microk8s.status
+sudo microk8s.enable dns storage
+sudo microk8s.kubectl get all --all-namespaces
+microk8s.kubectl apply -f ./config/
+sudo microk8s.kubectl get all --all-namespaces
+microk8s.kubectl logs pod/sprigapp-546448dfc5-h5hdv
+microk8s.kubectl delete -f ./config/
+
+DashBoard Token:
+token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
+microk8s kubectl -n kube-system describe secret $token
 
 ```
 
